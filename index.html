@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.Js Skillset</title>
+    <link rel="stylesheet" href="<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div id="app">
+        <h1 v-bind:title="title">{{message}}</h1>
+        <input type="text" v-model="message">
+        <ul>
+            <li style="list-style: none;" v-for="todo in todos">{{todo.id}}) {{todo.text}} </li>
+
+        </ul>
+
+        <img :src="url" v-bind:alt="title" v-bind:title="title"/>
+        <!-- <h1 v-else="viewed">You have not viewed the element</h1> -->
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue world',
+        title: "You loaded the page on " + new Date(),
+        url: "http://vuejs.org/images/logo.png",
+        intro: "welcome to our class<small>it is all about vue.js</small>",
+        viewed: false,
+        viewed2: true,
+
+        todos: [
+            {text: 'Learn Vue', id: 1},
+            {text: 'Like the video',  id: 2},
+            {text: 'Subscribe to devmarketer',  id:3},
+        ]
+    }
+
+})
+</script>
+
+</html>
