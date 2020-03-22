@@ -4,21 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue.Js Skillset</title>
-    <link rel="stylesheet" href="<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
+
 <body>
     <div id="app">
         <h1 v-bind:title="title">{{message}}</h1>
+        <h1>{{message}}</h1>
+        <p>
+            Visit: <a v-bind:href="url">{{cleanUrl}}</a>
+        </p>
+
+        <h1>Count:{{ count }}</h1>
+        <input type="text" class="form-control" v-model="url">
+        <button v-on:click="humanizeUrl" class="btn btn-primary">Humanize me</button>
+
+
         <input type="text" v-model="message">
+        <button v-on:click="countUp" class="btn btn-primary">Count Up</button>
+        <button v-on:click="countDown" class="btn btn-primary">Count Down</button>
         <ul>
-            <li style="list-style: none;" v-for="todo in todos">{{todo.id}}) {{todo.text}} </li>
-
+            <li style="list-style: none;" v-for="todo in todos">{{todo.id}}) {{todo.text}}</li> 
         </ul>
-
         <img :src="url" v-bind:alt="title" v-bind:title="title"/>
         <!-- <h1 v-else="viewed">You have not viewed the element</h1> -->
     </div>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
 var app = new Vue({
@@ -26,18 +38,35 @@ var app = new Vue({
     data: {
         message: 'Hello Vue world',
         title: "You loaded the page on " + new Date(),
-        url: "http://vuejs.org/images/logo.png",
+        url: "",
+        url2: "",
+        cleanUrl: "",
         intro: "welcome to our class<small>it is all about vue.js</small>",
         viewed: false,
         viewed2: true,
+        count: 0,
 
         todos: [
             {text: 'Learn Vue', id: 1},
             {text: 'Like the video',  id: 2},
             {text: 'Subscribe to devmarketer',  id:3},
         ]
-    }
+    },
+    methods:{
+        countUp: function(){
+            this.count += 1
+        },
 
+        countDown: function(){
+            this.count -= 1
+        },
+
+        humanizeUrl: function(){
+            // the /^ below means it should happen in the beginning of the string while the dollar sign means it has to be at the very end of the string
+            this.cleanUrl = this.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+        },
+
+    }
 })
 </script>
 
